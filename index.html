@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Detektif Kalimat SPOK - MPI Bahasa Indonesia Kelas 3 SD</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', 'Fredoka One', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: #f0f7e8;
+            background-image: radial-gradient(circle at 20% 30%, #d4e8c5 0%, transparent 30%),
+                              radial-gradient(circle at 90% 70%, #b8d9a8 0%, transparent 40%),
+                              linear-gradient(145deg, #e6f2db 0%, #f8fcf5 100%);
+            min-height: 100vh;
+            padding: 1rem;
+            color: #2c4a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 48px 48px 32px 32px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 20px 40px rgba(60, 90, 50, 0.2), 0 8px 16px rgba(0, 0, 0, 0.05);
+            border: 3px solid #d0e2c0;
+        }
+
+        /* LANDING */
+        .landing-page { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 1rem 0.5rem; }
+        .mascot-header { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.2rem; }
+        .mascot-emoji { font-size: 5rem; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1)); animation: bounce 2s infinite ease-in-out; }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .title-main { font-size: 3.2rem; font-weight: 800; color: #2d6a4f; text-shadow: 6px 6px 0 #b7e4c7, 10px 10px 20px rgba(0,0,0,0.08); line-height: 1.2; }
+        .subtitle { font-size: 1.5rem; background: #fefae0; padding: 0.8rem 2rem; border-radius: 60px; display: inline-block; border: 3px dashed #a7c957; color: #3a5e3a; margin-bottom: 1rem; font-weight: 600; }
+        .expedition-badge { background: #e9f5db; border-radius: 40px; padding: 0.5rem 1.8rem; color: #1e4a1e; font-weight: 600; font-size: 1.2rem; border: 2px solid #8fbc8f; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; }
+        .menu-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 1.5rem 0 2rem; width: 100%; }
+        .menu-card { background: #ffffffd9; backdrop-filter: blur(6px); border-radius: 36px; padding: 1.5rem 1rem; width: 190px; box-shadow: 0 15px 25px -8px rgba(60, 80, 40, 0.3), inset 0 -3px 0 #b7d9a8; border: 2px solid #b1d0a0; transition: all 0.2s; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+        .menu-card:hover { transform: scale(1.04) translateY(-5px); background: #ffffff; box-shadow: 0 22px 30px -10px #4f7a4f; border-color: #6a994e; }
+        .menu-card .card-icon { font-size: 3rem; filter: drop-shadow(2px 4px 4px rgba(0,0,0,0.1)); }
+        .menu-card .card-label { font-weight: 700; font-size: 1.15rem; color: #2b5e2b; background: #f1f9ea; padding: 0.4rem 1rem; border-radius: 30px; width: 100%; }
+        .menu-card .card-desc { font-size: 0.85rem; color: #527a4a; }
+        .btn-mulai { background: #f9c74f; border: none; border-radius: 60px; padding: 1.2rem 3.5rem; font-size: 1.8rem; font-weight: 800; color: #2d3e1f; box-shadow: 0 12px 0 #b87c1b, 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.1s; border: 3px solid #fff3cf; letter-spacing: 1px; margin-top: 0.5rem; }
+        .btn-mulai:active { transform: translateY(6px); box-shadow: 0 6px 0 #b87c1b, 0 8px 20px rgba(0,0,0,0.1); }
+
+        /* SECTION */
+        .section-container { display: none; width: 100%; animation: fadeIn 0.4s; }
+        .section-container.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title { font-size: 2.2rem; color: #1e4a1e; margin-bottom: 1rem; display: flex; align-items: center; gap: 15px; border-bottom: 4px dotted #a7c957; padding-bottom: 0.5rem; }
+        .back-btn { background: #e0e8d8; border: none; border-radius: 40px; padding: 0.6rem 1.8rem; font-weight: 600; font-size: 1.1rem; color: #2e5e2e; cursor: pointer; border: 2px solid #a7c957; transition: all 0.1s; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
+        .back-btn:hover { background: #cfe2c0; }
+
+        /* MATERI */
+        .materi-content { background: #fefef9; border-radius: 40px; padding: 2rem; line-height: 1.7; font-size: 1.05rem; border: 3px solid #cfe2c0; box-shadow: inset 0 0 20px #e1f0d4; max-height: 70vh; overflow-y: auto; }
+        .materi-content h1 { font-size: 1.9rem; color: #1e4a1e; margin-bottom: 0.8rem; }
+        .materi-content h2 { color: #2b6e2b; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        .materi-content p { margin: 0.8rem 0; }
+        .materi-content ul, .materi-content ol { margin-left: 2rem; margin-bottom: 0.8rem; }
+        .materi-content table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; }
+        .materi-content td, .materi-content th { border: 2px solid #b7d9a8; padding: 0.6rem 0.8rem; text-align: left; background: #f4faf0; }
+        .materi-content th { background: #d4edda; font-weight: 700; }
+        .materi-content blockquote { background: #f1f9ea; padding: 0.8rem 1.5rem; border-radius: 30px; margin: 1rem 0; border-left: 8px solid #a7c957; }
+        .ringkasan-card { background: linear-gradient(135deg, #f1f9ea, #e9f5db); border-radius: 30px; padding: 1.2rem 1.5rem; margin-top: 1.5rem; border: 2px dashed #a7c957; }
+        .ringkasan-card h3 { color: #1e4a1e; margin-bottom: 0.8rem; }
+        .ringkasan-card ul { list-style: none; margin-left: 0; }
+        .ringkasan-card li { padding: 0.4rem 0; border-bottom: 1px dotted #b1d0a0; }
+        .ringkasan-card li:last-child { border-bottom: none; }
+
+        /* LAB MAYA */
+        .lab-container { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+        .canvas-wrapper { flex: 2 1 520px; background: #1b3b1b; border-radius: 36px; padding: 0.8rem; box-shadow: 0 15px 25px rgba(0,0,0,0.3); }
+        canvas { display: block; width: 100%; height: auto; border-radius: 28px; background: linear-gradient(145deg, #fefae0, #e9f5db); }
+
+        .lab-controls { flex: 1 1 360px; background: #ffffffd9; border-radius: 36px; padding: 1.5rem; border: 3px solid #b1d0a0; box-shadow: 0 10px 20px rgba(60, 80, 40, 0.15); }
+        .lab-controls h3 { color: #1e4a1e; margin-bottom: 0.8rem; font-size: 1.25rem; }
+        .lab-panel-hint { font-size: 0.9rem; color: #6b8c5e; margin-bottom: 1rem; font-style: italic; }
+
+        .word-group { margin-bottom: 1.1rem; }
+        .word-group-label { font-weight: 800; color: #2b5e2b; font-size: 0.95rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 8px; }
+        .word-group-label .badge { background: #6a994e; color: white; border-radius: 20px; padding: 0.1rem 0.6rem; font-size: 0.8rem; }
+        .word-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .word-btn { background: #fff; border: 3px solid #b7d9a8; border-radius: 40px; padding: 0.5rem 1rem; font-weight: 700; font-size: 0.9rem; color: #2b4e2e; cursor: pointer; transition: 0.15s; font-family: inherit; }
+        .word-btn:hover { background: #e9f5db; border-color: #6a994e; transform: translateY(-2px); }
+        .word-btn.selected { background: #f9c74f; border-color: #b87c1b; color: #2c3e1f; box-shadow: 0 4px 0 #b87c1b; }
+
+        .lab-action-btns { display: flex; gap: 0.6rem; margin-top: 1rem; }
+        .btn-lab { background: #6a994e; border: none; border-radius: 40px; padding: 0.75rem 1.2rem; font-size: 1rem; font-weight: 700; color: white; box-shadow: 0 6px 0 #386641; cursor: pointer; flex: 1; transition: 0.1s; border: 2px solid #f2f7e8; font-family: inherit; }
+        .btn-lab:active { transform: translateY(4px); box-shadow: 0 2px 0 #386641; }
+        .btn-lab.reset { background: #bc6c25; box-shadow: 0 6px 0 #7d4815; }
+        .btn-lab.reset:active { box-shadow: 0 2px 0 #7d4815; }
+
+        .lab-feedback { margin-top: 1rem; padding: 0.9rem 1.2rem; border-radius: 30px; font-weight: 700; text-align: center; font-size: 0.95rem; background: #f1f9ea; border: 2px dashed #a7c957; color: #2b5e2b; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+        .lab-feedback.success { background: #d4edda; border-color: #2e7d32; color: #1b5e20; }
+        .lab-feedback.warn { background: #fff3cd; border-color: #bc6c25; color: #7d4815; }
+        .lab-feedback.error { background: #f8d7da; border-color: #b71c1c; color: #b71c1c; }
+
+        /* PUZZLE */
+        .puzzle-container { background: #f8f9f0; border-radius: 48px; padding: 2rem; border: 3px solid #a7c957; }
+        .puzzle-instruction { background: #fefae0; border-radius: 30px; padding: 1rem 1.5rem; margin-bottom: 1.2rem; border-left: 8px solid #f9c74f; font-weight: 600; font-size: 0.95rem; }
+        .puzzle-round-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; background: #e9f5db; border-radius: 40px; padding: 0.6rem 1.5rem; font-weight: 700; color: #1e4a1e; flex-wrap: wrap; gap: 0.5rem; font-size: 1rem; }
+        .puzzle-target-sentence { background: #d4edda; border-radius: 30px; padding: 0.8rem 1.2rem; margin-bottom: 1.2rem; text-align: center; font-weight: 800; color: #1e4a1e; font-size: 1.1rem; border: 2px dashed #2e7d32; }
+        .puzzle-target-sentence .label { display: block; font-size: 0.8rem; color: #4f6b4a; font-weight: 600; margin-bottom: 0.2rem; }
+
+        .puzzle-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+        .slot-col { display: flex; flex-direction: column; gap: 0.5rem; }
+        .slot-col-label { text-align: center; font-weight: 800; font-size: 1.1rem; color: white; border-radius: 20px; padding: 0.4rem; }
+        .slot-col-label.s-label { background: #2e7d32; }
+        .slot-col-label.p-label { background: #1565c0; }
+        .slot-col-label.o-label { background: #ef6c00; }
+        .slot-col-label.k-label { background: #c62828; }
+        .slot-target { min-height: 70px; background: #ffffffb3; border-radius: 20px; border: 4px dashed #b1d0a0; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.95rem; color: #447744; padding: 0.5rem; transition: 0.2s; font-weight: 600; word-break: break-word; }
+        .slot-target.filled { background: #d4edda; border: 4px solid #2e7d32; color: #1e4a1e; box-shadow: inset 0 0 10px #a5d6a7; }
+        .slot-target.hover { background: #fff3cd; border-color: #f9c74f; }
+
+        .puzzle-items { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; padding: 1.2rem; min-height: 100px; background: #dee9d4; border-radius: 40px; }
+        .puzzle-item { background: #f9c74f; padding: 0.7rem 1.3rem; border-radius: 40px; font-weight: 700; color: #2c3e1f; font-size: 1rem; box-shadow: 0 6px 0 #b87c1b, 0 4px 10px rgba(0,0,0,0.15); cursor: grab; user-select: none; transition: 0.1s; border: 3px solid #ffe5a3; touch-action: manipulation; }
+        .puzzle-item:active { cursor: grabbing; opacity: 0.7; }
+        .puzzle-item.dragging { opacity: 0.4; transform: scale(0.95); }
+        .feedback-puzzle { margin-top: 1rem; font-size: 1.15rem; font-weight: 700; color: #2e7d32; text-align: center; min-height: 35px; }
+
+        /* EVALUASI */
+        .evaluation-login { background: #fefae0; border-radius: 48px; padding: 2rem; max-width: 600px; margin: 0 auto; border: 4px solid #a7c957; text-align: center; }
+        .evaluation-login h3 { font-size: 1.7rem; margin-bottom: 1rem; color: #1e4a1e; }
+        .evaluation-login input { width: 100%; padding: 1rem; border-radius: 60px; border: 3px solid #b1d0a0; font-size: 1.1rem; margin: 0.5rem 0 1rem; background: white; font-family: inherit; }
+        .btn-eval { background: #2d6a4f; color: white; border: none; border-radius: 60px; padding: 1.2rem 2rem; font-size: 1.3rem; font-weight: 700; width: 100%; box-shadow: 0 8px 0 #1b4332; cursor: pointer; font-family: inherit; }
+        .btn-eval:active { transform: translateY(5px); box-shadow: 0 3px 0 #1b4332; }
+
+        .quiz-area { display: none; background: #ffffffd9; border-radius: 48px; padding: 2rem; margin-top: 1rem; border: 3px solid #8fbc8f; }
+        .quiz-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; background: #e9f5db; border-radius: 60px; padding: 0.8rem 1.8rem; margin-bottom: 1.5rem; font-weight: 700; font-size: 1.05rem; color: #1e4a1e; gap: 0.5rem; }
+        .quiz-header .lives { font-size: 1.4rem; letter-spacing: 4px; }
+        .question-box { background: #f8f9f0; border-radius: 40px; padding: 1.8rem; margin: 1rem 0; border-left: 20px solid #6a994e; }
+        .question-text { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.2rem; display: flex; gap: 12px; align-items: flex-start; line-height: 1.4; }
+        .question-text .icon { font-size: 2rem; flex-shrink: 0; }
+        .options { display: flex; flex-direction: column; gap: 0.9rem; }
+        .option-btn { background: #fff; border: 4px solid #b7d9a8; border-radius: 60px; padding: 1.1rem 1.6rem; font-size: 1.1rem; font-weight: 600; text-align: left; cursor: pointer; transition: 0.1s; color: #2b4e2b; font-family: inherit; }
+        .option-btn:hover:not(:disabled) { background: #e9f5db; border-color: #6a994e; }
+        .option-btn:disabled { cursor: default; }
+        .option-btn.correct { background: #a5d6a7; border-color: #1b5e20; color: #1b5e20; }
+        .option-btn.wrong { background: #f8d7da; border-color: #b71c1c; color: #b71c1c; opacity: 0.9; }
+        .hint-text { margin-top: 1rem; font-style: italic; color: #6a8e3a; font-size: 0.95rem; background: #f1f9ea; padding: 0.6rem 1rem; border-radius: 30px; }
+        .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+        .btn-nav { background: #a7c957; border: none; border-radius: 40px; padding: 0.9rem 2rem; font-weight: 700; font-size: 1.05rem; color: #1f3a1f; cursor: pointer; box-shadow: 0 6px 0 #6a8e3a; font-family: inherit; }
+        .btn-nav:active { transform: translateY(4px); box-shadow: 0 2px 0 #6a8e3a; }
+        .btn-nav:disabled { opacity: 0.5; transform: none; box-shadow: 0 6px 0 #6a8e3a; pointer-events: none; }
+        .pembahasan-locked { background: #f1f9ea; border-radius: 40px; padding: 1rem; margin-top: 1rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border: 2px solid #bc6c25; font-size: 0.95rem; font-weight: 600; }
+        .pembahasan-locked input { padding: 0.7rem 1.2rem; border-radius: 40px; border: 2px solid #b1d0a0; font-size: 1rem; flex: 1; min-width: 120px; font-family: inherit; }
+        .btn-unlock { background: #bc6c25; color: white; border: none; border-radius: 40px; padding: 0.7rem 1.8rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+        .pembahasan-content { display: none; background: #fefae0; border-radius: 36px; padding: 1.5rem; margin-top: 1rem; border-left: 15px solid #f9c74f; }
+        .pembahasan-content.show { display: block; }
+
+        /* FOOTER */
+        .footer { margin-top: 2rem; text-align: center; font-weight: 600; color: #4f6b4a; border-top: 3px solid #b1d0a0; padding-top: 1.5rem; font-size: 1.05rem; }
+        .footer strong { color: #2d6a4f; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .app-container { padding: 1rem; border-radius: 30px; }
+            .title-main { font-size: 2.2rem; }
+            .subtitle { font-size: 1.1rem; padding: 0.6rem 1.2rem; }
+            .menu-card { width: 140px; padding: 1rem 0.8rem; }
+            .menu-card .card-icon { font-size: 2.2rem; }
+            .menu-card .card-label { font-size: 0.95rem; }
+            .btn-mulai { font-size: 1.4rem; padding: 1rem 2rem; }
+            .section-title { font-size: 1.6rem; }
+            .question-text { font-size: 1.1rem; }
+            .option-btn { font-size: 0.95rem; padding: 0.9rem 1.2rem; }
+            .puzzle-slots { grid-template-columns: repeat(2, 1fr); }
+            .slot-target { font-size: 0.85rem; min-height: 60px; }
+            .puzzle-item { padding: 0.6rem 1rem; font-size: 0.9rem; }
+            .quiz-header { font-size: 0.85rem; padding: 0.6rem 1rem; }
+            .quiz-header .lives { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- LANDING PAGE -->
+        <div id="landingPage" class="landing-page">
+            <div class="mascot-header">
+                <span class="mascot-emoji">🌿</span>
+                <span class="mascot-emoji">🧭</span>
+                <span class="mascot-emoji">🔍</span>
+            </div>
+            <div class="title-main">DETEKTIF KALIMAT SPOK</div>
+            <div class="subtitle">Ekspedisi Rimba Kata & Kalimat</div>
+            <div class="expedition-badge">🏕️ Fase B — Kelas 3 SD 🌳</div>
+            <p style="font-size:1.2rem; max-width:750px; margin-bottom:0.5rem;">
+                Selamat datang, Detektif Muda! Temukan <strong>Subjek</strong>, <strong>Predikat</strong>,
+                <strong>Objek</strong>, dan <strong>Keterangan</strong> dalam kalimat tunggal. Ayo mulai!
+            </p>
+
+            <div class="menu-cards">
+                <div class="menu-card" onclick="showSection('tujuanSection')">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-label">Tujuan</div>
+                    <div class="card-desc">Apa yang akan kita pelajari?</div>
+                </div>
+                <div class="menu-card" onclick="showSection('materiSection')">
+                    <div class="card-icon">📖</div>
+                    <div class="card-label">Materi</div>
+                    <div class="card-desc">Baca dan pahami</div>
+                </div>
+                <div class="menu-card" onclick="showSection('labSection')">
+                    <div class="card-icon">🔬</div>
+                    <div class="card-label">Lab Maya</div>
+                    <div class="card-desc">Bengkel Kalimat SPOK</div>
+                </div>
+                <div class="menu-card" onclick="showSection('puzzleSection')">
+                    <div class="card-icon">🧩</div>
+                    <div class="card-label">Puzzle</div>
+                    <div class="card-desc">Susun Kalimat SPOK</div>
+                </div>
+                <div class="menu-card" onclick="showSection('evaluasiSection')">
+                    <div class="card-icon">📝</div>
+                    <div class="card-label">Evaluasi</div>
+                    <div class="card-desc">Uji kemampuanmu</div>
+                </div>
+            </div>
+            <button class="btn-mulai" onclick="showSection('tujuanSection')">🚀 MULAI PETUALANGAN</button>
+        </div>
+
+        <!-- TUJUAN -->
+        <div id="tujuanSection" class="section-container">
+            <button class="back-btn" onclick="showSection('landingPage')">← Kembali ke Beranda</button>
+            <div class="section-title">🎯 Tujuan Pembelajaran</div>
+            <div class="materi-content" style="background:#f1f9ea;">
+                <p style="font-size:1.2rem; font-weight:600; margin-bottom:1rem;">Setelah mengikuti pembelajaran ini, murid mampu:</p>
+                <ul style="font-size:1.1rem; line-height:2.1;">
+                    <li>✅ <strong>Mengidentifikasi</strong> unsur Subjek (S), Predikat (P), Objek (O), dan Keterangan (K).</li>
+                    <li>✅ <strong>Menjelaskan</strong> fungsi S, P, O, dan K dengan bahasa sederhana.</li>
+                    <li>✅ <strong>Menyusun</strong> kata acak menjadi kalimat tunggal berpola SPOK.</li>
+                    <li>✅ <strong>Membuat</strong> kalimat SPOK berdasarkan gambar atau pengalaman sehari-hari.</li>
+                    <li>✅ <strong>Bekerja sama</strong> dan berani menyampaikan hasilnya.</li>
+                    <li>✅ <strong>Memperbaiki</strong> kalimat berdasarkan masukan.</li>
+                </ul>
+                <div class="ringkasan-card">
+                    <p>🌟 <em>"Detektif Kalimat SPOK" — belajar sambil menjelajah rimba kata!</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MATERI -->
+        <div id="materiSection" class="section-container">
+            <button class="back-btn" onclick="showSection('landingPage')">← Kembali ke Beranda</button>
+            <div class="section-title">📖 Materi: Kalimat Tunggal SPOK</div>
+            <div class="materi-content">
+                <h1>🌟 Detektif Kalimat SPOK</h1>
+                <p><strong>Materi:</strong> Bahasa Indonesia Kelas 3 SD<br>
+                <strong>Topik:</strong> Kalimat tunggal berpola SPOK<br>
+                <strong>Alokasi waktu:</strong> 2 × 35 menit<br>
+                <strong>Model:</strong> Pembelajaran interaktif, kolaboratif, dan berbasis permainan</p>
+
+                <h2>🎯 Tujuan Pembelajaran</h2>
+                <ol>
+                    <li><strong>Mengidentifikasi</strong> unsur <strong>Subjek (S), Predikat (P), Objek (O), dan Keterangan (K)</strong> dalam kalimat sederhana.</li>
+                    <li><strong>Menjelaskan</strong> fungsi S, P, O, dan K menggunakan bahasa sederhana.</li>
+                    <li><strong>Menyusun</strong> kata-kata acak menjadi kalimat tunggal berpola SPOK.</li>
+                    <li><strong>Membuat</strong> kalimat tunggal berpola SPOK berdasarkan gambar atau pengalaman.</li>
+                    <li><strong>Bekerja sama</strong> dan berani menyampaikan hasilnya.</li>
+                    <li><strong>Memperbaiki kalimat</strong> berdasarkan masukan.</li>
+                </ol>
+
+                <h2>🔎 Misi 1 — "Siapa Melakukan Apa?"</h2>
+                <p>Perhatikan gambar: 👧 <strong>Siti menyiram bunga di taman.</strong></p>
+                <ul>
+                    <li><strong>Siapa?</strong> → Siti = <strong>S</strong> (Subjek)</li>
+                    <li><strong>Melakukan apa?</strong> → menyiram = <strong>P</strong> (Predikat)</li>
+                    <li><strong>Apa yang disiram?</strong> → bunga = <strong>O</strong> (Objek)</li>
+                    <li><strong>Di mana?</strong> → di taman = <strong>K</strong> (Keterangan)</li>
+                </ul>
+
+                <h2>🧩 Misi 2 — "Susun Kalimatnya!"</h2>
+                <p>Kata acak: <strong>di halaman – Rani – membaca – buku</strong></p>
+                <p>Susunan yang benar: <strong>Rani membaca buku di halaman.</strong></p>
+                <table>
+                    <tr><th>S</th><th>P</th><th>O</th><th>K</th></tr>
+                    <tr><td>Rani</td><td>membaca</td><td>buku</td><td>di halaman</td></tr>
+                </table>
+
+                <h2>🕵️ Misi 3 — "Detektif Kesalahan"</h2>
+                <p>Kalimat salah: ❌ <strong>Budi bola bermain di lapangan.</strong></p>
+                <p>Perbaikan: ✅ <strong>Budi bermain bola di lapangan.</strong></p>
+                <p>Budi (S) | bermain (P) | bola (O) | di lapangan (K)</p>
+
+                <h2>🎨 Misi 4 — "Buat Kalimat dari Gambar"</h2>
+                <p>Gambar anak 🚲 <strong>bersepeda di taman</strong> → <strong>Doni mengendarai sepeda di taman.</strong></p>
+                <table>
+                    <tr><th>S</th><th>P</th><th>O</th><th>K</th></tr>
+                    <tr><td>Doni</td><td>mengendarai</td><td>sepeda</td><td>di taman</td></tr>
+                </table>
+
+                <h2>🎤 Misi 5 — "Presentasi Kalimat"</h2>
+                <p>Setiap kelompok membacakan kalimat SPOK dan kelompok lain memberi tanggapan: 👍 sudah tepat atau 🔍 perlu diperbaiki.</p>
+
+                <h2>🏆 Penutup — "Tantangan 60 Detik"</h2>
+                <p><strong>Buat satu kalimat SPOK tentang kegiatanmu sebelum berangkat sekolah!</strong></p>
+                <p>Contoh: <strong>Saya sarapan nasi di rumah.</strong> → Saya (S) – sarapan (P) – nasi (O) – di rumah (K).</p>
+
+                <h2>💡 Agar Benar-benar Interaktif</h2>
+                <ul>
+                    <li><strong>Drag and Drop</strong> → menyusun kata menjadi kalimat.</li>
+                    <li><strong>Whiteboard</strong> → menandai S, P, O, K.</li>
+                    <li><strong>Kuis interaktif</strong> → menentukan S, P, O, atau K.</li>
+                </ul>
+                <p><em>Konsep utama: melihat → menyusun → mencoba → berdiskusi → memperbaiki → membuat → mempresentasikan.</em></p>
+
+                <div class="ringkasan-card">
+                    <h3>📌 Ringkasan Cepat</h3>
+                    <ul>
+                        <li><strong>Subjek (S)</strong> = pelaku/tokoh → <em>Siapa?</em></li>
+                        <li><strong>Predikat (P)</strong> = tindakan → <em>Melakukan apa?</em></li>
+                        <li><strong>Objek (O)</strong> = sasaran → <em>Apa yang dikenai tindakan?</em></li>
+                        <li><strong>Keterangan (K)</strong> = tempat/waktu/cara → <em>Di mana? Kapan? Bagaimana?</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- LAB MAYA — BENGKEL KALIMAT SPOK -->
+        <div id="labSection" class="section-container">
+            <button class="back-btn" onclick="showSection('landingPage')">← Kembali ke Beranda</button>
+            <div class="section-title">🔬 Lab Maya: Bengkel Kalimat SPOK</div>
+            <div class="lab-container">
+                <div class="canvas-wrapper">
+                    <canvas id="labCanvas" width="620" height="420"></canvas>
+                </div>
+                <div class="lab-controls">
+                    <h3>🎯 Pilih Kata untuk Setiap Unsur</h3>
+                    <p class="lab-panel-hint">Klik satu kata di tiap kolom untuk membentuk kalimat SPOK. Kalimat akan muncul di papan tulis!</p>
+
+                    <div class="word-group">
+                        <div class="word-group-label">👤 Subjek (S) — Siapa? <span class="badge">S</span></div>
+                        <div class="word-options" id="opsiS"></div>
+                    </div>
+
+                    <div class="word-group">
+                        <div class="word-group-label">⚡ Predikat (P) — Melakukan apa? <span class="badge" style="background:#1565c0;">P</span></div>
+                        <div class="word-options" id="opsiP"></div>
+                    </div>
+
+                    <div class="word-group">
+                        <div class="word-group-label">🎯 Objek (O) — Apa yang dikenai? <span class="badge" style="background:#ef6c00;">O</span></div>
+                        <div class="word-options" id="opsiO"></div>
+                    </div>
+
+                    <div class="word-group">
+                        <div class="word-group-label">📍 Keterangan (K) — Di mana? <span class="badge" style="background:#c62828;">K</span></div>
+                        <div class="word-options" id="opsiK"></div>
+                    </div>
+
+                    <div class="lab-action-btns">
+                        <button class="btn-lab reset" id="resetLabBtn">🔄 Reset</button>
+                        <button class="btn-lab" id="cekLabBtn">✅ Cek Kalimat</button>
+                    </div>
+
+                    <div class="lab-feedback" id="labFeedback">
+                        Pilih satu kata di tiap kolom untuk menyusun kalimat SPOK.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUZZLE — SUSUN KALIMAT SPOK -->
+        <div id="puzzleSection" class="section-container">
+            <button class="back-btn" onclick="showSection('landingPage')">← Kembali ke Beranda</button>
+            <div class="section-title">🧩 Puzzle: Susun Kalimat SPOK</div>
+            <div class="puzzle-container">
+                <div class="puzzle-instruction">
+                    🎯 <strong>Petunjuk:</strong> Seret setiap kata ke kotak <strong>S, P, O, atau K</strong> yang tepat agar terbentuk kalimat SPOK yang benar!
+                </div>
+                <div class="puzzle-round-info">
+                    <span id="puzzleRoundLabel">Ronde 1 dari 3</span>
+                    <span id="puzzleScoreLabel">⭐ Benar: 0</span>
+                </div>
+                <div class="puzzle-target-sentence">
+                    <span class="label">📝 Susun kalimat:</span>
+                    <span id="puzzleTargetText">Rani membaca buku di halaman</span>
+                </div>
+                <div class="puzzle-slots" id="puzzleSlots"></div>
+                <div class="puzzle-items" id="puzzleItems"></div>
+                <div class="feedback-puzzle" id="puzzleFeedback"></div>
+                <div style="display:flex; gap:0.6rem; margin-top:1.5rem; flex-wrap:wrap;">
+                    <button class="btn-lab reset" id="resetPuzzleBtn" style="flex:1; max-width:200px;">🔄 Ulangi Ronde</button>
+                    <button class="btn-lab" id="nextRoundBtn" style="flex:1; max-width:200px; display:none;">▶ Ronde Berikutnya</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVALUASI -->
+        <div id="evaluasiSection" class="section-container">
+            <button class="back-btn" onclick="showSection('landingPage')">← Kembali ke Beranda</button>
+            <div class="section-title">📝 Evaluasi: Uji Kemampuan SPOK</div>
+
+            <div id="evalLogin" class="evaluation-login">
+                <h3>🔐 Isi Data Diri</h3>
+                <p style="margin-bottom:1rem; color:#5a7a4a;">Masukkan nama, kelas, dan kunci evaluasi untuk memulai kuis.</p>
+                <input type="text" id="studentName" placeholder="Nama Lengkap" autocomplete="off">
+                <input type="text" id="studentClass" placeholder="Kelas (contoh: 3A)" autocomplete="off">
+                <input type="password" id="evalKey" placeholder="Kunci Evaluasi (@1)">
+                <button class="btn-eval" id="startQuizBtn">▶ MULAI KERJAKAN SOAL</button>
+                <p style="margin-top:0.8rem; font-size:0.85rem; color:#6b8c5e;">Kunci: @1 (hanya untuk membuka pembahasan)</p>
+            </div>
+
+            <div id="quizArea" class="quiz-area">
+                <div class="quiz-header">
+                    <span id="quizStudentInfo">👤 Siswa: -</span>
+                    <span id="quizScore">⭐ Skor: 0</span>
+                    <span id="quizLives" class="lives">❤️❤️❤️</span>
+                    <span id="quizTimer">⏳ 45s</span>
+                </div>
+                <div id="questionContainer"></div>
+                <div class="quiz-footer">
+                    <button class="btn-nav" id="prevQuestionBtn" disabled>◀ Sebelumnya</button>
+                    <button class="btn-nav" id="nextQuestionBtn">Selanjutnya ▶</button>
+                </div>
+                <div id="pembahasanLock" class="pembahasan-locked">
+                    <span>🔒 Pembahasan terkunci. Masukkan kunci @1:</span>
+                    <input type="password" id="pembahasanKeyInput" placeholder="Kunci @1">
+                    <button class="btn-unlock" id="unlockPembahasanBtn">Buka</button>
+                </div>
+                <div id="pembahasanContent" class="pembahasan-content">
+                    <p><strong>📘 Pembahasan:</strong> <span id="pembahasanText">-</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>🌿 Dikembangkan oleh <strong>ALIYAH</strong> — Media Pembelajaran Interaktif (MPI) Fase B</p>
+            <p style="font-size:0.85rem; margin-top:0.3rem;">© 2026 Petualangan Detektif Kalimat SPOK · Bahasa Indonesia Kelas 3 SD</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // STATE
+        // ============================================================
+        const state = {
+            currentSection: 'landingPage',
+            quizStarted: false,
+            currentQuestionIndex: 0,
+            score: 0,
+            lives: 3,
+            maxLives: 3,
+            timer: null,
+            timeLeft: 45,
+            answered: false,
+            studentName: '',
+            studentClass: '',
+            // Lab state
+            labSelected: { S: null, P: null, O: null, K: null },
+            // Puzzle state
+            puzzleRound: 0,
+            puzzleScore: 0,
+        };
+
+        // ============================================================
+        // LAB MAYA — BENGKEL KALIMAT SPOK
+        // ============================================================
+        const labData = {
+            S: ['Siti', 'Rani', 'Budi', 'Doni'],
+            P: ['menyiram', 'membaca', 'bermain', 'mengendarai'],
+            O: ['bunga', 'buku', 'bola', 'sepeda'],
+            K: ['di taman', 'di halaman', 'di lapangan', 'di jalan'],
+        };
+
+        // Kombinasi kalimat SPOK yang benar
+        const labCorrectCombos = [
+            { S: 'Siti', P: 'menyiram', O: 'bunga', K: 'di taman' },
+            { S: 'Rani', P: 'membaca', O: 'buku', K: 'di halaman' },
+            { S: 'Budi', P: 'bermain', O: 'bola', K: 'di lapangan' },
+            { S: 'Doni', P: 'mengendarai', O: 'sepeda', K: 'di jalan' },
+        ];
+
+        let labInitialized = false;
+        let labCanvas, labCtx;
+
+        function initLab() {
+            if (labInitialized) return;
+            labInitialized = true;
+
+            labCanvas = document.getElementById('labCanvas');
+            labCtx = labCanvas.getContext('2d');
+
+            // Render word buttons
+            ['S', 'P', 'O', 'K'].forEach(unsur => {
+                const container = document.getElementById('opsi' + unsur);
+                container.innerHTML = '';
+                labData[unsur].forEach(kata => {
+                    const btn = document.createElement('button');
+                    btn.className = 'word-btn';
+                    btn.textContent = kata;
+                    btn.dataset.unsur = unsur;
+                    btn.dataset.kata = kata;
+                    btn.addEventListener('click', () => pilihKataLab(unsur, kata, btn));
+                    container.appendChild(btn);
+                });
+            });
+
+            document.getElementById('resetLabBtn').addEventListener('click', resetLab);
+            document.getElementById('cekLabBtn').addEventListener('click', cekLab);
+
+            drawLab();
+        }
+
+        function pilihKataLab(unsur, kata, btnEl) {
+            document.querySelectorAll(`#opsi${unsur} .word-btn`).forEach(b => b.classList.remove('selected'));
+            btnEl.classList.add('selected');
+            state.labSelected[unsur] = kata;
+
+            document.getElementById('labFeedback').textContent = `Kamu memilih ${unsur} = "${kata}". Pilih unsur lain, lalu klik Cek Kalimat.`;
+            document.getElementById('labFeedback').className = 'lab-feedback';
+
+            drawLab();
+        }
+
+        function resetLab() {
+            state.labSelected = { S: null, P: null, O: null, K: null };
+            document.querySelectorAll('.word-btn').forEach(b => b.classList.remove('selected'));
+            document.getElementById('labFeedback').textContent = 'Pilih satu kata di tiap kolom untuk menyusun kalimat SPOK.';
+            document.getElementById('labFeedback').className = 'lab-feedback';
+            drawLab();
+        }
+
+        function cekLab() {
+            const { S, P, O, K } = state.labSelected;
+            if (!S || !P || !O || !K) {
+                document.getElementById('labFeedback').textContent = '⚠️ Lengkapi dulu semua unsur S, P, O, dan K!';
+                document.getElementById('labFeedback').className = 'lab-feedback warn';
+                return;
+            }
+
+            const cocok = labCorrectCombos.some(c =>
+                c.S === S && c.P === P && c.O === O && c.K === K
+            );
+
+            if (cocok) {
+                document.getElementById('labFeedback').textContent = `🎉 Hebat! "${S} ${P} ${O} ${K}" adalah kalimat SPOK yang tepat!`;
+                document.getElementById('labFeedback').className = 'lab-feedback success';
+                // Animasi celebrasi di canvas
+                animateLabSuccess();
+            } else {
+                document.getElementById('labFeedback').textContent = `🤔 "${S} ${P} ${O} ${K}" belum cocok. Coba pasangkan pelaku dengan tindakan & tempat yang sesuai!`;
+                document.getElementById('labFeedback').className = 'lab-feedback warn';
+            }
+        }
+
+        function drawLab(highlight = false) {
+            if (!labCtx) return;
+            const w = labCanvas.width, h = labCanvas.height;
+            labCtx.clearRect(0, 0, w, h);
+
+            // Background
+            const grad = labCtx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, '#fefae0');
+            grad.addColorStop(1, '#e9f5db');
+            labCtx.fillStyle = grad;
+            labCtx.fillRect(0, 0, w, h);
+
+            // Title
+            labCtx.font = 'bold 22px "Segoe UI", cursive';
+            labCtx.fillStyle = '#1e4a1e';
+            labCtx.textAlign = 'center';
+            labCtx.fillText('📋 Papan Bengkel Kalimat SPOK', w/2, 38);
+
+            // Subtitle
+            labCtx.font = '14px "Segoe UI"';
+            labCtx.fillStyle = '#4f6b4a';
+            labCtx.fillText('Susun kata menjadi kalimat yang benar!', w/2, 62);
+
+            // Draw 4 boxes: S, P, O, K
+            const boxes = [
+                { key: 'S', label: 'Subjek', color: '#a5d6a7', border: '#2e7d32', x: 30, y: 100 },
+                { key: 'P', label: 'Predikat', color: '#90caf9', border: '#1565c0', x: 175, y: 100 },
+                { key: 'O', label: 'Objek', color: '#ffcc80', border: '#ef6c00', x: 320, y: 100 },
+                { key: 'K', label: 'Keterangan', color: '#ef9a9a', border: '#c62828', x: 465, y: 100 },
+            ];
+            const boxW = 130, boxH = 130;
+
+            boxes.forEach(b => {
+                labCtx.fillStyle = b.color;
+                labCtx.beginPath();
+                labCtx.roundRect(b.x, b.y, boxW, boxH, 20);
+                labCtx.fill();
+                labCtx.strokeStyle = b.border;
+                labCtx.lineWidth = 4;
+                labCtx.stroke();
+
+                // Letter S/P/O/K
+                labCtx.font = 'bold 34px "Segoe UI", cursive';
+                labCtx.fillStyle = '#1e4a1e';
+                labCtx.textAlign = 'center';
+                labCtx.fillText(b.key, b.x + boxW/2, b.y + 45);
+
+                // Label
+                labCtx.font = 'bold 13px "Segoe UI"';
+                labCtx.fillStyle = '#2c4a2e';
+                labCtx.fillText(b.label, b.x + boxW/2, b.y + 65);
+
+                // Selected word
+                const val = state.labSelected[b.key];
+                if (val) {
+                    // Wrap text if long
+                    labCtx.font = 'bold 16px "Segoe UI", cursive';
+                    labCtx.fillStyle = '#1e4a1e';
+                    const words = val.split(' ');
+                    if (words.length > 1 && val.length > 10) {
+                        labCtx.fillText(words[0], b.x + boxW/2, b.y + 92);
+                        labCtx.fillText(words.slice(1).join(' '), b.x + boxW/2, b.y + 112);
+                    } else {
+                        labCtx.fillText(val, b.x + boxW/2, b.y + 102);
+                    }
+                } else {
+                    labCtx.font = 'italic 13px "Segoe UI"';
+                    labCtx.fillStyle = '#8aaa7a';
+                    labCtx.fillText('(kosong)', b.x + boxW/2, b.y + 102);
+                }
+            });
+
+            // Resulting sentence
+            const S = state.labSelected.S || '...';
+            const P = state.labSelected.P || '...';
+            const O = state.labSelected.O || '...';
+            const K = state.labSelected.K || '...';
+            const kalimat = `${S} ${P} ${O} ${K}.`;
+
+            labCtx.fillStyle = '#fefae0';
+            labCtx.beginPath();
+            labCtx.roundRect(30, 270, w - 60, 100, 24);
+            labCtx.fill();
+            labCtx.strokeStyle = '#bc6c25';
+            labCtx.lineWidth = 3;
+            labCtx.setLineDash([10, 6]);
+            labCtx.stroke();
+            labCtx.setLineDash([]);
+
+            labCtx.font = 'bold 14px "Segoe UI"';
+            labCtx.fillStyle = '#8a5a1a';
+            labCtx.textAlign = 'center';
+            labCtx.fillText('📝 KALIMAT YANG TERBENTUK:', w/2, 295);
+
+            labCtx.font = 'bold 22px "Segoe UI", cursive';
+            labCtx.fillStyle = '#2d6a4f';
+            labCtx.fillText(kalimat, w/2, 335);
+
+            labCtx.font = 'bold 13px "Segoe UI"';
+            labCtx.fillStyle = '#4f6b4a';
+            labCtx.fillText('Pola: Subjek – Predikat – Objek – Keterangan', w/2, 358);
+
+            // Decorative footer
+            labCtx.font = '13px "Segoe UI"';
+            labCtx.fillStyle = '#6a8e3a';
+            labCtx.fillText('🌿 Ayo coba kombinasi lain untuk menemukan kalimat SPOK yang benar!', w/2, 395);
+        }
+
+        function animateLabSuccess() {
+            let frame = 0;
+            const maxFrames = 30;
+            const origDraw = drawLab;
+            function anim() {
+                if (frame > maxFrames) { drawLab(); return; }
+                frame++;
+                drawLab();
+                // Draw celebration
+                labCtx.font = 'bold 60px "Segoe UI"';
+                labCtx.fillStyle = `rgba(249, 199, 79, ${1 - frame/maxFrames})`;
+                labCtx.textAlign = 'center';
+                labCtx.fillText('⭐', labCanvas.width/2, labCanvas.height/2);
+                requestAnimationFrame(anim);
+            }
+            anim();
+        }
+
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+            if (w < 2 * r) r = w / 2;
+            if (h < 2 * r) r = h / 2;
+            this.moveTo(x + r, y);
+            this.lineTo(x + w - r, y);
+            this.quadraticCurveTo(x + w, y, x + w, y + r);
+            this.lineTo(x + w, y + h - r);
+            this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            this.lineTo(x + r, y + h);
+            this.quadraticCurveTo(x, y + h, x, y + h - r);
+            this.lineTo(x, y + r);
+            this.quadraticCurveTo(x, y, x + r, y);
+            return this;
+        };
+
+        // ============================================================
+        // PUZZLE — SUSUN KALIMAT SPOK (3 RONDE)
+        // ============================================================
+        const puzzleRounds = [
+            {
+                target: 'Rani membaca buku di halaman',
+                items: [
+                    { id: 'r1-s', label: 'Rani', slot: 'S' },
+                    { id: 'r1-p', label: 'membaca', slot: 'P' },
+                    { id: 'r1-o', label: 'buku', slot: 'O' },
+                    { id: 'r1-k', label: 'di halaman', slot: 'K' },
+                ]
+            },
+            {
+                target: 'Budi bermain bola di lapangan',
+                items: [
+                    { id: 'r2-s', label: 'Budi', slot: 'S' },
+                    { id: 'r2-p', label: 'bermain', slot: 'P' },
+                    { id: 'r2-o', label: 'bola', slot: 'O' },
+                    { id: 'r2-k', label: 'di lapangan', slot: 'K' },
+                ]
+            },
+            {
+                target: 'Ibu memasak nasi di dapur',
+                items: [
+                    { id: 'r3-s', label: 'Ibu', slot: 'S' },
+                    { id: 'r3-p', label: 'memasak', slot: 'P' },
+                    { id: 'r3-o', label: 'nasi', slot: 'O' },
+                    { id: 'r3-k', label: 'di dapur', slot: 'K' },
+                ]
+            }
+        ];
+
+        let puzzleState = {
+            slots: { S: null, P: null, O: null, K: null },
+            remainingItems: [],
+        };
+
+        function renderPuzzle() {
+            const round = puzzleRounds[state.puzzleRound];
+            if (!round) return;
+
+            // Update labels
+            document.getElementById('puzzleRoundLabel').textContent = `Ronde ${state.puzzleRound + 1} dari ${puzzleRounds.length}`;
+            document.getElementById('puzzleScoreLabel').textContent = `⭐ Benar: ${state.puzzleScore}`;
+            document.getElementById('puzzleTargetText').textContent = round.target;
+
+            // Reset state
+            puzzleState.slots = { S: null, P: null, O: null, K: null };
+            puzzleState.remainingItems = [...round.items].sort(() => Math.random() - 0.5);
+
+            // Render slots
+            const slotsContainer = document.getElementById('puzzleSlots');
+            slotsContainer.innerHTML = '';
+            ['S', 'P', 'O', 'K'].forEach(letter => {
+                const col = document.createElement('div');
+                col.className = 'slot-col';
+                const labelClass = letter === 'S' ? 's-label' : letter === 'P' ? 'p-label' : letter === 'O' ? 'o-label' : 'k-label';
+                const labelText = letter === 'S' ? '👤 S' : letter === 'P' ? '⚡ P' : letter === 'O' ? '🎯 O' : '📍 K';
+                col.innerHTML = `
+                    <div class="slot-col-label ${labelClass}">${labelText}</div>
+                    <div class="slot-target" data-slot="${letter}" id="slot-${letter}">⬇ Seret</div>
+                `;
+                slotsContainer.appendChild(col);
+            });
+
+            renderPuzzleItems();
+            attachPuzzleDropListeners();
+
+            document.getElementById('puzzleFeedback').textContent = '';
+            document.getElementById('nextRoundBtn').style.display = 'none';
+        }
+
+        function renderPuzzleItems() {
+            const itemsContainer = document.getElementById('puzzleItems');
+            itemsContainer.innerHTML = '';
+            puzzleState.remainingItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'puzzle-item';
+                div.textContent = item.label;
+                div.draggable = true;
+                div.dataset.itemId = item.id;
+                div.dataset.slot = item.slot;
+                div.addEventListener('dragstart', handlePuzzleDragStart);
+                div.addEventListener('dragend', handlePuzzleDragEnd);
+                div.addEventListener('touchstart', handlePuzzleTouchStart, { passive: false });
+                div.addEventListener('touchmove', handlePuzzleTouchMove, { passive: false });
+                div.addEventListener('touchend', handlePuzzleTouchEnd, { passive: false });
+                itemsContainer.appendChild(div);
+            });
+        }
+
+        function attachPuzzleDropListeners() {
+            document.querySelectorAll('.slot-target').forEach(slotEl => {
+                slotEl.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    slotEl.classList.add('hover');
+                });
+                slotEl.addEventListener('dragleave', () => slotEl.classList.remove('hover'));
+                slotEl.addEventListener('drop', handlePuzzleDrop);
+            });
+        }
+
+        function handlePuzzleDragStart(e) {
+            e.target.classList.add('dragging');
+            e.dataTransfer.setData('text/plain', e.target.dataset.itemId);
+        }
+        function handlePuzzleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.slot-target').forEach(s => s.classList.remove('hover'));
+        }
+
+        function handlePuzzleDrop(e) {
+            e.preventDefault();
+            const slotEl = e.target.closest('.slot-target');
+            if (!slotEl) return;
+            slotEl.classList.remove('hover');
+            const itemId = e.dataTransfer.getData('text/plain');
+            if (!itemId) return;
+            processPuzzleDrop(itemId, slotEl);
+        }
+
+        let puzzleTouchItem = null;
+        function handlePuzzleTouchStart(e) {
+            const item = e.target.closest('.puzzle-item');
+            if (!item) return;
+            puzzleTouchItem = item;
+            item.classList.add('dragging');
+            e.preventDefault();
+        }
+        function handlePuzzleTouchMove(e) { e.preventDefault(); }
+        function handlePuzzleTouchEnd(e) {
+            if (!puzzleTouchItem) return;
+            const touch = e.changedTouches[0];
+            const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+            const slotEl = targetEl?.closest('.slot-target');
+            if (slotEl) processPuzzleDrop(puzzleTouchItem.dataset.itemId, slotEl);
+            puzzleTouchItem.classList.remove('dragging');
+            puzzleTouchItem = null;
+        }
+
+        function processPuzzleDrop(itemId, slotEl) {
+            const slotLetter = slotEl.dataset.slot;
+            const round = puzzleRounds[state.puzzleRound];
+            const item = round.items.find(i => i.id === itemId);
+            if (!item) return;
+
+            // Cek apakah item cocok dengan slot
+            if (item.slot !== slotLetter) {
+                document.getElementById('puzzleFeedback').textContent = '❌ Kata ini tidak cocok untuk kotak ' + slotLetter + '. Coba pikirkan lagi!';
+                document.getElementById('puzzleFeedback').style.color = '#b71c1c';
+                return;
+            }
+
+            // Cek slot sudah terisi
+            if (puzzleState.slots[slotLetter]) {
+                document.getElementById('puzzleFeedback').textContent = '⚠️ Kotak ' + slotLetter + ' sudah terisi!';
+                document.getElementById('puzzleFeedback').style.color = '#bc6c25';
+                return;
+            }
+
+            // Isi slot
+            puzzleState.slots[slotLetter] = item.label;
+            slotEl.textContent = item.label;
+            slotEl.classList.add('filled');
+            puzzleState.remainingItems = puzzleState.remainingItems.filter(i => i.id !== itemId);
+            renderPuzzleItems();
+
+            // Cek selesai
+            const allFilled = puzzleState.slots.S && puzzleState.slots.P && puzzleState.slots.O && puzzleState.slots.K;
+            if (allFilled) {
+                // Verifikasi kalimat
+                const kalimat = `${puzzleState.slots.S} ${puzzleState.slots.P} ${puzzleState.slots.O} ${puzzleState.slots.K}`;
+                if (kalimat === round.target) {
+                    state.puzzleScore++;
+                    document.getElementById('puzzleScoreLabel').textContent = `⭐ Benar: ${state.puzzleScore}`;
+                    document.getElementById('puzzleFeedback').textContent = '🏆 Hebat! Kalimat SPOK berhasil disusun dengan tepat!';
+                    document.getElementById('puzzleFeedback').style.color = '#1e6b1e';
+                    // Show next round button
+                    if (state.puzzleRound < puzzleRounds.length - 1) {
+                        document.getElementById('nextRoundBtn').style.display = 'inline-block';
+                    } else {
+                        document.getElementById('puzzleFeedback').textContent = '🎉 Selamat! Kamu menyelesaikan semua ronde puzzle!';
+                    }
+                } else {
+                    document.getElementById('puzzleFeedback').textContent = '🤔 Susunannya belum tepat. Coba cek ulang!';
+                    document.getElementById('puzzleFeedback').style.color = '#b87c1b';
+                }
+            } else {
+                document.getElementById('puzzleFeedback').textContent = '✅ Benar! Lanjutkan ke kotak berikutnya.';
+                document.getElementById('puzzleFeedback').style.color = '#2e7d32';
+            }
+        }
+
+        function resetCurrentPuzzleRound() {
+            renderPuzzle();
+        }
+
+        function nextPuzzleRound() {
+            if (state.puzzleRound < puzzleRounds.length - 1) {
+                state.puzzleRound++;
+                renderPuzzle();
+            }
+        }
+
+        document.getElementById('resetPuzzleBtn')?.addEventListener('click', resetCurrentPuzzleRound);
+        document.getElementById('nextRoundBtn')?.addEventListener('click', nextPuzzleRound);
+
+        // ============================================================
+        // SOAL EVALUASI
+        // ============================================================
+        const questions = [
+            { id:1, icon:'❓', question:'Unsur kalimat yang menjawab pertanyaan "Siapa?" disebut...', options:['Subjek (S)','Predikat (P)','Objek (O)'], correct:0, explanation:'Subjek (S) adalah unsur kalimat yang menjawab pertanyaan "Siapa?" atau "Apa?" dan biasanya berupa orang, benda, atau hal yang menjadi pokok pembicaraan.', hint:'Siapa yang melakukan tindakan?' },
+            { id:2, icon:'📖', question:'Predikat dalam kalimat "Ayah membaca koran" adalah...', options:['Ayah','membaca','koran'], correct:1, explanation:'Predikat (P) adalah unsur kalimat yang menyatakan tindakan atau kegiatan. Pada kalimat "Ayah membaca koran", predikatnya adalah "membaca".', hint:'Cari kata kerja (tindakan).' },
+            { id:3, icon:'🧩', question:'Kalimat "Rani menyapu lantai di kamar" memiliki objek...', options:['Rani','menyapu','lantai'], correct:2, explanation:'Objek (O) adalah sasaran dari tindakan predikat. Pada kalimat "Rani menyapu lantai di kamar", objeknya adalah "lantai".', hint:'Apa yang menjadi sasaran tindakan?' },
+            { id:4, icon:'🌿', question:'Keterangan pada kalimat "Ibu memasak nasi di dapur" adalah...', options:['Ibu','memasak','di dapur'], correct:2, explanation:'Keterangan (K) menjawab pertanyaan "di mana?", "kapan?", atau "bagaimana?". Pada kalimat tersebut, keterangannya adalah "di dapur" (tempat).', hint:'Di mana kegiatan itu dilakukan?' },
+            { id:5, icon:'🔍', question:'Susunan SPOK yang benar dari kata: "bola - Budi - di lapangan - menendang" adalah...', options:['Budi menendang bola di lapangan','Bola Budi menendang di lapangan','Budi bola menendang di lapangan'], correct:0, explanation:'Urutan SPOK: Budi (S) menendang (P) bola (O) di lapangan (K). Subjek di awal, lalu predikat, objek, dan keterangan.', hint:'Subjek (pelaku) diletakkan di awal kalimat.' },
+            { id:6, icon:'📝', question:'Fungsi objek dalam kalimat adalah...', options:['Pelaku tindakan','Tindakan yang dilakukan','Sasaran tindakan'], correct:2, explanation:'Objek (O) adalah unsur kalimat yang menjadi sasaran atau penerima tindakan dari predikat.', hint:'Objek dikenai tindakan.' },
+            { id:7, icon:'🎯', question:'Kalimat "Siti menyiram bunga di taman" memiliki predikat...', options:['Siti','menyiram','bunga'], correct:1, explanation:'Predikat (P) menyatakan tindakan. Pada kalimat "Siti menyiram bunga di taman", predikatnya adalah "menyiram".', hint:'Kata kerja atau tindakan.' },
+            { id:8, icon:'🌟', question:'Manakah kalimat dengan pola SPOK yang benar?', options:['Doni sepeda mengendarai di taman','Doni mengendarai sepeda di taman','Di taman Doni sepeda mengendarai'], correct:1, explanation:'Pola SPOK: Doni (S) mengendarai (P) sepeda (O) di taman (K).', hint:'Subjek + Predikat + Objek + Keterangan.' },
+            { id:9, icon:'🧠', question:'Keterangan waktu pada kalimat "Ayah bekerja pagi ini" adalah...', options:['Ayah','bekerja','pagi ini'], correct:2, explanation:'Keterangan waktu (K) menjawab pertanyaan "kapan?". Pada kalimat tersebut, keterangan waktunya adalah "pagi ini".', hint:'Kapan kegiatan itu dilakukan?' },
+            { id:10, icon:'🏆', question:'Objek pada kalimat "Kakak mencuci mobil di halaman" adalah...', options:['Kakak','mencuci','mobil'], correct:2, explanation:'Objek (O) adalah sasaran tindakan. Pada kalimat "Kakak mencuci mobil di halaman", objeknya adalah "mobil".', hint:'Apa yang menjadi sasaran tindakan mencuci?' }
+        ];
+
+        // ============================================================
+        // NAVIGATION
+        // ============================================================
+        function showSection(sectionId) {
+            document.querySelectorAll('.section-container, .landing-page').forEach(el => el.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            state.currentSection = sectionId;
+
+            if (sectionId === 'labSection') {
+                initLab();
+                drawLab();
+            }
+            if (sectionId === 'puzzleSection') {
+                state.puzzleRound = 0;
+                state.puzzleScore = 0;
+                renderPuzzle();
+            }
+            if (sectionId === 'evaluasiSection') {
+                document.getElementById('evalLogin').style.display = 'block';
+                document.getElementById('quizArea').style.display = 'none';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('landingPage').classList.add('active');
+
+        // ============================================================
+        // EVALUASI / KUIS
+        // ============================================================
+        document.getElementById('startQuizBtn')?.addEventListener('click', function() {
+            const name = document.getElementById('studentName').value.trim();
+            const cls = document.getElementById('studentClass').value.trim();
+            const key = document.getElementById('evalKey').value.trim();
+
+            if (!name || !cls) { alert('Mohon isi nama dan kelas terlebih dahulu!'); return; }
+            if (key !== '@1') { alert('Kunci evaluasi salah. Gunakan @1 untuk masuk.'); return; }
+
+            state.studentName = name;
+            state.studentClass = cls;
+            state.quizStarted = true;
+            state.currentQuestionIndex = 0;
+            state.score = 0;
+            state.lives = 3;
+            state.answered = false;
+
+            document.getElementById('evalLogin').style.display = 'none';
+            document.getElementById('quizArea').style.display = 'block';
+            document.getElementById('quizStudentInfo').textContent = `👤 ${name} (${cls})`;
+            document.getElementById('pembahasanLock').style.display = 'flex';
+            document.getElementById('pembahasanContent').classList.remove('show');
+            document.getElementById('pembahasanKeyInput').value = '';
+
+            renderQuestion();
+        });
+
+        function renderQuestion() {
+            const q = questions[state.currentQuestionIndex];
+            const container = document.getElementById('questionContainer');
+            container.innerHTML = `
+                <div class="question-box">
+                    <div class="question-text">
+                        <span class="icon">${q.icon}</span>
+                        <span>${q.question}</span>
+                    </div>
+                    <div class="options" id="optionsContainer">
+                        ${q.options.map((opt, idx) => `
+                            <button class="option-btn" data-idx="${idx}">${String.fromCharCode(65 + idx)}. ${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div class="hint-text">💡 Petunjuk: ${q.hint}</div>
+                </div>
+            `;
+
+            document.getElementById('quizScore').textContent = `⭐ Skor: ${state.score}`;
+            document.getElementById('quizLives').textContent = '❤️'.repeat(state.lives) + '🖤'.repeat(state.maxLives - state.lives);
+
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (state.answered) return;
+                    handleAnswer(parseInt(this.dataset.idx));
+                });
+            });
+
+            state.answered = false;
+            document.getElementById('prevQuestionBtn').disabled = state.currentQuestionIndex === 0;
+            document.getElementById('nextQuestionBtn').disabled = false;
+
+            if (state.timer) clearInterval(state.timer);
+            state.timeLeft = 45;
+            document.getElementById('quizTimer').textContent = `⏳ ${state.timeLeft}s`;
+            state.timer = setInterval(() => {
+                if (!state.quizStarted) return;
+                state.timeLeft--;
+                document.getElementById('quizTimer').textContent = `⏳ ${state.timeLeft}s`;
+                if (state.timeLeft <= 0) {
+                    clearInterval(state.timer);
+                    if (!state.answered) handleAnswer(-1);
+                }
+            }, 1000);
+        }
+
+        function handleAnswer(selectedIdx) {
+            if (state.answered) return;
+            const q = questions[state.currentQuestionIndex];
+            const isCorrect = (selectedIdx === q.correct);
+            state.answered = true;
+            clearInterval(state.timer);
+
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                const idx = parseInt(btn.dataset.idx);
+                btn.disabled = true;
+                if (idx === q.correct) btn.classList.add('correct');
+                if (idx === selectedIdx && !isCorrect) btn.classList.add('wrong');
+            });
+
+            if (isCorrect) {
+                state.score += 10;
+                document.getElementById('quizScore').textContent = `⭐ Skor: ${state.score}`;
+            } else {
+                state.lives = Math.max(0, state.lives - 1);
+                document.getElementById('quizLives').textContent = '❤️'.repeat(state.lives) + '🖤'.repeat(state.maxLives - state.lives);
+                if (state.lives <= 0) {
+                    setTimeout(() => {
+                        alert('❤️ Nyawa habis! Ayo coba lagi dari awal.');
+                        state.quizStarted = false;
+                        showSection('evaluasiSection');
+                    }, 800);
+                    return;
+                }
+            }
+            document.getElementById('pembahasanText').textContent = q.explanation;
+            document.getElementById('nextQuestionBtn').disabled = false;
+        }
+
+        document.getElementById('nextQuestionBtn')?.addEventListener('click', () => {
+            if (state.currentQuestionIndex < questions.length - 1) {
+                state.currentQuestionIndex++;
+                document.getElementById('pembahasanContent').classList.remove('show');
+                document.getElementById('pembahasanLock').style.display = 'flex';
+                document.getElementById('pembahasanKeyInput').value = '';
+                renderQuestion();
+            } else {
+                if (state.lives > 0) {
+                    const total = questions.length * 10;
+                    alert(`🎉 Selamat ${state.studentName}!\n\nSkor akhir: ${state.score} / ${total}\nNyawa tersisa: ${state.lives}\n\nKamu adalah Detektif Kalimat SPOK yang hebat! 🏅`);
+                }
+                showSection('landingPage');
+            }
+        });
+
+        document.getElementById('prevQuestionBtn')?.addEventListener('click', () => {
+            if (state.currentQuestionIndex > 0) {
+                state.currentQuestionIndex--;
+                document.getElementById('pembahasanContent').classList.remove('show');
+                document.getElementById('pembahasanLock').style.display = 'flex';
+                document.getElementById('pembahasanKeyInput').value = '';
+                renderQuestion();
+            }
+        });
+
+        document.getElementById('unlockPembahasanBtn')?.addEventListener('click', () => {
+            const key = document.getElementById('pembahasanKeyInput').value.trim();
+            if (key === '@1') {
+                document.getElementById('pembahasanContent').classList.add('show');
+                document.getElementById('pembahasanLock').style.display = 'none';
+            } else {
+                alert('Kunci salah! Gunakan @1');
+            }
+        });
+
+        window.showSection = showSection;
+    </script>
+</body>
+</html>
